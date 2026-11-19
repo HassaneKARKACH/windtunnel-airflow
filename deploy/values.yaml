@@ -1,0 +1,57 @@
+# Values for the official Apache Airflow Helm chart "airflow" 1.22.0 (repo https://airflow.apache.org).
+# This file cannot pin the chart version: pass --version 1.22.0 to helm.
+
+# airflowVersion drives the chart logic, defaultAirflowTag picks the image: keep them equal.
+airflowVersion: "3.2.2"
+defaultAirflowTag: "3.2.2"
+
+# Local image built by "make image": the official one plus the load test DAGs.
+# It exists only in the kind nodes, never in a registry.
+defaultAirflowRepository: windtunnel-airflow
+
+executor: CeleryExecutor
+
+# kind does not set the "workload" label: "make cluster" does.
+scheduler:
+  nodeSelector:
+    workload: airflow-services
+
+apiServer:
+  nodeSelector:
+    workload: airflow-services
+
+dagProcessor:
+  nodeSelector:
+    workload: airflow-services
+
+triggerer:
+  nodeSelector:
+    workload: airflow-services
+
+workers:
+  celery:
+    replicas: 2
+    nodeSelector:
+      workload: airflow-tasks
+
+redis:
+  enabled: true
+  nodeSelector:
+    workload: airflow-services
+
+postgresql:
+  primary:
+    nodeSelector:
+      workload: airflow-services
+
+statsd:
+  nodeSelector:
+    workload: airflow-services
+
+migrateDatabaseJob:
+  nodeSelector:
+    workload: airflow-services
+
+createUserJob:
+  nodeSelector:
+    workload: airflow-services

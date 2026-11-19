@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Airflow (local runs)
+logs/
+airflow.db
+airflow.cfg
+webserver_config.py
+standalone_admin_password.txt
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*.kubeconfig
+kubeconfig
+
+# Docker / kind / Helm artifacts
+*.tar
+*.tgz
+charts/
+
+# Claude Code and project notes (local only)
+.claude/
+PROJET.md
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
